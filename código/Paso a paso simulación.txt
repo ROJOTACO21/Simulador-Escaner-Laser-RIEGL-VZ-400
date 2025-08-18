@@ -1,0 +1,29 @@
+Debo ajustar los links de los gif para los ángulos phi y theta.
+
+
+Generalidades:
+Python Lenguaje
+VS entorno de desarrollo
+Streamlit plataforma que despliega la página web
+
+
+
+Correr el código:
+
+streamlit run simulador_wizard.py
+
+
+
+Actualizar el código:
+
+En el terminal ejecutar:
+git add .
+git commit -m "Actualización del simulador"
+git push origin main
+
+
+Paso a paso
+
+1. Crear y abrir la carpeta en VS code.
+2. Crear el archivo: nombre.py
+3. Activar el entorno virtual (venv): python -m venv venv
