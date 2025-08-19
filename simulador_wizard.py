@@ -27,9 +27,9 @@ st.image("IMA/gif_intro.gif", caption="Vista general del escaneo", use_container
 
 st.header("Paso 2: Parámetros PHI SOCS (Ángulo de línea - φ)")
 
-phi_start = st.number_input("Start angle (°)", min_value=0.0, max_value=360.0, value=0.0, step=0.1)
-phi_stop = st.number_input("Stop angle (°)", min_value=0.0, max_value=360.0, value=180.0, step=0.1)
-phi_inc = st.number_input("Increment Δφ (°)", min_value=0.0024, max_value=0.5, value=0.01, step=0.001, format="%.4f")
+phi_start = st.number_input("Start angle (°)", min_value=0.0, max_value=360.0, value=0.0, step=1)
+phi_stop = st.number_input("Stop angle (°)", min_value=0.0, max_value=360.0, value=180.0, step=1)
+phi_inc = st.number_input("Increment Δφ (°)", min_value=0.0024, max_value=0.5, value=0.05, step=0.001, format="%.4f")
 
 st.image("IMA/vista planta.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
 
@@ -42,9 +42,9 @@ if phi_start >= phi_stop:
 
 st.header("Paso 3: Parámetros THETA SOCS (Ángulo de marco - θ)")
 
-theta_start = st.number_input("Start angle (°)", min_value=30.0, max_value=130.0, value=30.0, step=0.1)
-theta_stop = st.number_input("Stop angle (°)", min_value=30.0, max_value=130.0, value=100.0, step=0.1)
-theta_inc = st.number_input("Increment Δθ (°)", min_value=0.0024, max_value=0.288, value=0.01, step=0.001, format="%.4f")
+theta_start = st.number_input("Start angle (°)", min_value=30.0, max_value=130.0, value=30.0, step=1)
+theta_stop = st.number_input("Stop angle (°)", min_value=30.0, max_value=130.0, value=100.0, step=1)
+theta_inc = st.number_input("Increment Δθ (°)", min_value=0.0024, max_value=0.288, value=0.05, step=0.001, format="%.4f")
 
 #st.image("theta.gif", caption="Movimiento vertical del escaneo", use_column_width=True)
 

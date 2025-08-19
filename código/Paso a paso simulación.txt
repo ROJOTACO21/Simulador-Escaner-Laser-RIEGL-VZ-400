@@ -24,6 +24,88 @@ git push origin main
 
 Paso a paso
 
+
 1. Crear y abrir la carpeta en VS code.
+
+
 2. Crear el archivo: nombre.py
+
+
 3. Activar el entorno virtual (venv): python -m venv venv
+
+
+4. Crear el requirements con:
+streamlit
+numpy
+matplotlib
+
+
+5. Ejecutar en el terminal: pip install -r requirements.txt
+
+
+6. Escribir el código.
+
+
+7. Ejecutar el código: 
+streamlit run simulador_wizard.py
+
+
+8. Inicializar Git en la carpeta del proyecto: 
+git init
+
+
+9. Conectar el repositorio local con GitHub:
+git remote add origin https://github.com/ROJOTACO21/Simulador-Escaner-Laser-RIEGL-VZ-400.git 
+
+
+10. Añadir archivos:
+git add .
+
+
+11. Crear el commit (ajustes):
+git commit -m "Primer commit - subida inicial del simulador"
+
+
+12. Subir todo a GitHub:
+git branch -M main
+git push -u origin main
+
+
+10. Si ya se ha cargado algo forzarlo a limpiar todo: 
+git push origin main --force
+
+
+11. Crear app en streamlit.
+
+Ojo: el link debe ser desde el archivo .py en GitHub
+https://github.com/ROJOTACO21/Simulador-Escaner-Laser-RIEGL-VZ-400/blob/main/simulador_wizard.py
+
+
+12. Final:
+https://simuladorwizardpy-nrwsmb3u325xscnze9wmt4.streamlit.app/
+
+
+
+
+Para actualizar:
+
+1. Ver qué archivos cambiaron
+git status
+
+
+2. Agregar los cambios al área de preparación
+git add .
+
+
+3. Hacer un commit con un mensaje descriptivo
+git commit -m "ajuste en la simulación ..."
+
+
+4. Subir al repositorio remoto (GitHub)
+git push origin main
+
+
+Por lo que, para los ajustes sería:
+git add .
+git commit -m "mensaje del ajuste realizado"
+git push origin main
