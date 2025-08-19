@@ -106,6 +106,10 @@ git push origin main
 
 
 Por lo que, para los ajustes sería:
+
+Primero:
+git push origin main --force
+
 git add .
 git commit -m "mensaje del ajuste realizado"
 git push origin main
