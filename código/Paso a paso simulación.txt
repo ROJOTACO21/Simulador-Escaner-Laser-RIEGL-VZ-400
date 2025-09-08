@@ -87,7 +87,7 @@ https://simuladorwizardpy-nrwsmb3u325xscnze9wmt4.streamlit.app/
 
 
 
-Para actualizar:
+Para actualizar el código:
 
 1. Ver qué archivos cambiaron
 git status
@@ -105,11 +105,15 @@ git commit -m "ajuste en la simulación ..."
 git push origin main
 
 
+
 Por lo que, para los ajustes sería:
+
 
 Primero:
 git push origin main --force
 
+
+Segundo:
 git add .
 git commit -m "mensaje del ajuste realizado"
 git push origin main
