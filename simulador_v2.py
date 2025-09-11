@@ -1,5 +1,6 @@
 import streamlit as st
 import math
+import re
 
 # Configuración de la página
 st.set_page_config(page_title="Simulador Escáner Láser RIEGL VZ-400", layout="wide")
@@ -27,12 +28,30 @@ def formato_numero(valor, decimales=2):
     else:
         return parte_entera_str
 
+# Función para validar y convertir entrada de incremento
+def validar_incremento(valor, valor_por_defecto=0.05):
+    """
+    Valida y convierte la entrada de incremento, permitiendo comas como separador decimal
+    """
+    try:
+        # Reemplazar coma por punto para convertir a float
+        valor = str(valor).replace(",", ".")
+        return float(valor)
+    except ValueError:
+        return valor_por_defecto
+
 # Título principal
 st.title("Simulador Escáner Láser RIEGL VZ-400 - Preparación de Levantamiento")
 st.write("Este simulador te guiará paso a paso para definir los parámetros de un levantamiento con el patrón de levantamiento Rectangular Field of View (FOV).")
 
 # Crear layout de 3 columnas
 col1, col2, col3 = st.columns([1, 1, 1])
+
+# Inicializar variables de incremento en session_state si no existen
+if 'phi_inc' not in st.session_state:
+    st.session_state.phi_inc = 0.05
+if 'theta_inc' not in st.session_state:
+    st.session_state.theta_inc = 0.05
 
 # Columna 1: Introducción y Paso 2 (PHI SOCS)
 with col1:
@@ -53,10 +72,16 @@ with col1:
     # ---------------------------
     st.header("Paso 2: Parámetros PHI SOCS (Ángulo de línea - φ)")
     
-    # Modificado: solo números enteros para start y stop angles
-    phi_start = st.number_input("Start angle (°)", min_value=0, max_value=360, value=0, step=1, key="phi_start", format="%d")
-    phi_stop = st.number_input("Stop angle (°)", min_value=0, max_value=360, value=180, step=1, key="phi_stop", format="%d")
-    phi_inc = st.number_input("Increment Δφ (°)", min_value=0.0024, max_value=0.5, value=0.05, step=0.001, format="%.4f", key="phi_inc")
+    # Campos para ángulos (solo enteros)
+    phi_start = st.number_input("Start angle (°)", min_value=0, max_value=360, value=0, step=1, key="phi_start")
+    phi_stop = st.number_input("Stop angle (°)", min_value=0, max_value=360, value=180, step=1, key="phi_stop")
+    
+    # Campo para incremento con validación personalizada
+    phi_inc_input = st.text_input("Increment Δφ (°)", value="0,05", key="phi_inc_input")
+    st.session_state.phi_inc = validar_incremento(phi_inc_input)
+    
+    # Mostrar el valor actual del incremento formateado
+    st.write(f"Valor actual: {formato_numero(st.session_state.phi_inc, 4)}°")
     
     st.image("IMA/vista planta.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
     
@@ -70,16 +95,22 @@ with col2:
     # ---------------------------
     st.header("Paso 3: Parámetros THETA SOCS (Ángulo de marco - θ)")
     
-    # Modificado: solo números enteros para start y stop angles
-    theta_start = st.number_input("Start angle (°)", min_value=30, max_value=130, value=30, step=1, key="theta_start", format="%d")
-    theta_stop = st.number_input("Stop angle (°)", min_value=30, max_value=130, value=100, step=1, key="theta_stop", format="%d")
-    theta_inc = st.number_input("Increment Δθ (°)", min_value=0.0024, max_value=0.288, value=0.05, step=0.001, format="%.4f", key="theta_inc")
+    # Campos para ángulos (solo enteros)
+    theta_start = st.number_input("Start angle (°)", min_value=30, max_value=130, value=30, step=1, key="theta_start")
+    theta_stop = st.number_input("Stop angle (°)", min_value=30, max_value=130, value=100, step=1, key="theta_stop")
+    
+    # Campo para incremento con validación personalizada
+    theta_inc_input = st.text_input("Increment Δθ (°)", value="0,05", key="theta_inc_input")
+    st.session_state.theta_inc = validar_incremento(theta_inc_input)
+    
+    # Mostrar el valor actual del incremento formateado
+    st.write(f"Valor actual: {formato_numero(st.session_state.theta_inc, 4)}°")
     
     if theta_start >= theta_stop:
         st.error("⚠️ El Start angle debe ser menor que el Stop angle.")
     
     # Verificar si los incrementos son iguales
-    incrementos_iguales = abs(phi_inc - theta_inc) < 0.0001  # Tolerancia para comparación de floats
+    incrementos_iguales = abs(st.session_state.phi_inc - st.session_state.theta_inc) < 0.0001
     
     if not incrementos_iguales:
         st.error("⚠️ El Increment de THETA y PHI deben ser iguales para una nube de puntos uniforme.")
@@ -125,7 +156,7 @@ with col3:
         st.markdown(f"<div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; margin-bottom: 10px;'>"
                    f"<b>Start:</b> {formato_numero(phi_start, 0)}°<br>"
                    f"<b>Stop:</b> {formato_numero(phi_stop, 0)}°<br>"
-                   f"<b>Δφ:</b> {formato_numero(phi_inc, 4)}°</div>", 
+                   f"<b>Δφ:</b> {formato_numero(st.session_state.phi_inc, 4)}°</div>", 
                    unsafe_allow_html=True)
         
     with input_col2:
@@ -133,7 +164,7 @@ with col3:
         st.markdown(f"<div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; margin-bottom: 10px;'>"
                    f"<b>Start:</b> {formato_numero(theta_start, 0)}°<br>"
                    f"<b>Stop:</b> {formato_numero(theta_stop, 0)}°<br>"
-                   f"<b>Δθ:</b> {formato_numero(theta_inc, 4)}°</div>", 
+                   f"<b>Δθ:</b> {formato_numero(st.session_state.theta_inc, 4)}°</div>", 
                    unsafe_allow_html=True)
         
         st.markdown("**Frecuencia**")
@@ -154,9 +185,9 @@ with col3:
         else:
             N = 100  # líneas/s para 300 kHz
             
-        M = theta_total / theta_inc  # puntos/línea
+        M = theta_total / st.session_state.theta_inc  # puntos/línea
         P = M * N  # puntos/s
-        Vb = phi_inc * N  # °/s
+        Vb = st.session_state.phi_inc * N  # °/s
         phi_total = phi_stop - phi_start  # rango horizontal en °
         T = phi_total / Vb  # s
         PT = P * T  # puntos totales
