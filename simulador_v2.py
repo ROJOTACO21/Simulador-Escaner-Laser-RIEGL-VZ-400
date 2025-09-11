@@ -53,8 +53,9 @@ with col1:
     # ---------------------------
     st.header("Paso 2: Parámetros PHI SOCS (Ángulo de línea - φ)")
     
-    phi_start = st.number_input("Start angle (°)", min_value=0.0, max_value=360.0, value=0.0, step=1.0, key="phi_start")
-    phi_stop = st.number_input("Stop angle (°)", min_value=0.0, max_value=360.0, value=180.0, step=1.0, key="phi_stop")
+    # Modificado: solo números enteros para start y stop angles
+    phi_start = st.number_input("Start angle (°)", min_value=0, max_value=360, value=0, step=1, key="phi_start", format="%d")
+    phi_stop = st.number_input("Stop angle (°)", min_value=0, max_value=360, value=180, step=1, key="phi_stop", format="%d")
     phi_inc = st.number_input("Increment Δφ (°)", min_value=0.0024, max_value=0.5, value=0.05, step=0.001, format="%.4f", key="phi_inc")
     
     st.image("IMA/vista planta.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
@@ -69,8 +70,9 @@ with col2:
     # ---------------------------
     st.header("Paso 3: Parámetros THETA SOCS (Ángulo de marco - θ)")
     
-    theta_start = st.number_input("Start angle (°)", min_value=30.0, max_value=130.0, value=30.0, step=1.0, key="theta_start")
-    theta_stop = st.number_input("Stop angle (°)", min_value=30.0, max_value=130.0, value=100.0, step=1.0, key="theta_stop")
+    # Modificado: solo números enteros para start y stop angles
+    theta_start = st.number_input("Start angle (°)", min_value=30, max_value=130, value=30, step=1, key="theta_start", format="%d")
+    theta_stop = st.number_input("Stop angle (°)", min_value=30, max_value=130, value=100, step=1, key="theta_stop", format="%d")
     theta_inc = st.number_input("Increment Δθ (°)", min_value=0.0024, max_value=0.288, value=0.05, step=0.001, format="%.4f", key="theta_inc")
     
     if theta_start >= theta_stop:
@@ -121,16 +123,16 @@ with col3:
     with input_col1:
         st.markdown("**PHI SOCS**")
         st.markdown(f"<div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; margin-bottom: 10px;'>"
-                   f"<b>Start:</b> {formato_numero(phi_start, 1)}°<br>"
-                   f"<b>Stop:</b> {formato_numero(phi_stop, 1)}°<br>"
+                   f"<b>Start:</b> {formato_numero(phi_start, 0)}°<br>"
+                   f"<b>Stop:</b> {formato_numero(phi_stop, 0)}°<br>"
                    f"<b>Δφ:</b> {formato_numero(phi_inc, 4)}°</div>", 
                    unsafe_allow_html=True)
         
     with input_col2:
         st.markdown("**THETA SOCS**")
         st.markdown(f"<div style='background-color: #f0f2f6; padding: 10px; border-radius: 5px; margin-bottom: 10px;'>"
-                   f"<b>Start:</b> {formato_numero(theta_start, 1)}°<br>"
-                   f"<b>Stop:</b> {formato_numero(theta_stop, 1)}°<br>"
+                   f"<b>Start:</b> {formato_numero(theta_start, 0)}°<br>"
+                   f"<b>Stop:</b> {formato_numero(theta_stop, 0)}°<br>"
                    f"<b>Δθ:</b> {formato_numero(theta_inc, 4)}°</div>", 
                    unsafe_allow_html=True)
         
