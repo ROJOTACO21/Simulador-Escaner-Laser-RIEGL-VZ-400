@@ -176,7 +176,7 @@ with col3:
     if phi_start >= phi_stop or theta_start >= theta_stop or not incrementos_iguales:
         st.error("No se pueden calcular los resultados debido a errores en los parámetros de entrada.")
     else:
-        # Cálculos (se ejecutan automáticamente cuando cambia cualquier variable)
+        # Cálculos con valores reales
         theta_total = theta_stop - theta_start  # [°]
         
         # Ajuste de N según la frecuencia seleccionada
@@ -192,7 +192,7 @@ with col3:
         T = phi_total / Vb  # s
         PT = P * T  # puntos totales
         
-        # Aproximar T al entero mayor más cercano
+        # Aproximar T al entero mayor más cercano (solo para mostrar)
         T_redondeado = math.ceil(T)
         
         # Mostrar fórmulas
@@ -204,15 +204,23 @@ with col3:
         st.latex(r"T = \frac{\phi_{\text{total}}}{V_b} \ \text{[s]}")
         st.latex(r"PT = P \times T \ \text{[puntos]}")
         
-        # Resultados
+        # Resultados (mostrar valores aproximados)
         st.subheader("📊 Resultados")
         col_res1, col_res2, col_res3 = st.columns(3)
         with col_res1:
             st.metric(label="N (líneas/s)", value=formato_numero(N, 0))
-            st.metric(label="M (puntos/línea)", value=formato_numero(M, 0))
+            st.metric(label="M (puntos/línea)", value=formato_numero(round(M), 0))
         with col_res2:
-            st.metric(label="P (puntos/s)", value=formato_numero(P, 0))
+            st.metric(label="P (puntos/s)", value=formato_numero(round(P), 0))
             st.metric(label="Vb (°/s)", value=formato_numero(Vb, 2))
         with col_res3:
             st.metric(label="T (segundos)", value=formato_numero(T_redondeado, 0))
-            st.metric(label="PT (puntos)", value=formato_numero(PT, 0))
+            st.metric(label="PT (puntos)", value=formato_numero(round(PT), 0))
+        
+        # Mostrar valores reales en un expander para referencia
+        with st.expander("Ver valores reales de cálculo"):
+            st.write(f"**Valores reales:**")
+            st.write(f"- M (puntos/línea): {M:.2f}")
+            st.write(f"- P (puntos/s): {P:.2f}")
+            st.write(f"- T (segundos): {T:.2f}")
+            st.write(f"- PT (puntos): {PT:.2f}")
