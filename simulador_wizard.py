@@ -146,7 +146,7 @@ with col3:
     st.header("Paso 5: Cálculo de parámetros de rendimiento")
     
     # Sección de parámetros de entrada (resumen)
-    st.subheader("📋 Parámetros de Entrada")
+    st.subheader("Parámetros de Entrada")
     
     # Mejorar la estética con columnas y formato mejorado
     input_col1, input_col2 = st.columns(2)
@@ -196,7 +196,7 @@ with col3:
         T_redondeado = math.ceil(T)
         
         # Mostrar fórmulas
-        st.subheader("🧮 Fórmulas utilizadas")
+        st.subheader("Fórmulas utilizadas")
         st.latex(r"N = \text{líneas/s (depende de la frecuencia)}")
         st.latex(r"M = \frac{\theta_{\text{total}}}{\Delta\theta} \ \text{[puntos/línea]}")
         st.latex(r"P = M \times N \ \text{[puntos/s]}")
@@ -205,7 +205,7 @@ with col3:
         st.latex(r"PT = P \times T \ \text{[puntos]}")
         
         # Resultados (mostrar valores aproximados)
-        st.subheader("📊 Resultados")
+        st.subheader("Resultados")
         col_res1, col_res2, col_res3 = st.columns(3)
         with col_res1:
             st.metric(label="N (líneas/s)", value=formato_numero(N, 0))
