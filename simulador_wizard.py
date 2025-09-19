@@ -83,7 +83,7 @@ with col1:
     # Mostrar el valor actual del incremento formateado
     st.write(f"Valor actual: {formato_numero(st.session_state.phi_inc, 4)}°")
     
-    st.image("IMA/vista planta.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
+    st.image("IMA/vista en planta.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
     
     if phi_start >= phi_stop:
         st.error("⚠️ El Start angle debe ser menor que el Stop angle.")
@@ -106,8 +106,6 @@ with col2:
     # Mostrar el valor actual del incremento formateado
     st.write(f"Valor actual: {formato_numero(st.session_state.theta_inc, 4)}°")
 
-    st.image("IMA/vista perfil.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
-    
     if theta_start >= theta_stop:
         st.error("⚠️ El Start angle debe ser menor que el Stop angle.")
     
@@ -116,6 +114,8 @@ with col2:
     
     if not incrementos_iguales:
         st.error("⚠️ El Increment de THETA y PHI deben ser iguales para una nube de puntos uniforme.")
+    
+    st.image("IMA/vista en perfil.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
     
     # ---------------------------
     # Paso 4 - Frecuencia del láser
