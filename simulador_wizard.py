@@ -105,6 +105,8 @@ with col2:
     
     # Mostrar el valor actual del incremento formateado
     st.write(f"Valor actual: {formato_numero(st.session_state.theta_inc, 4)}°")
+
+    st.image("IMA/vista perfil.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
     
     if theta_start >= theta_stop:
         st.error("⚠️ El Start angle debe ser menor que el Stop angle.")
