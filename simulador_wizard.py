@@ -115,7 +115,7 @@ with col2:
     if not incrementos_iguales:
         st.error("⚠️ El Increment de THETA y PHI deben ser iguales para una nube de puntos uniforme.")
     
-    st.image("IMA/vista en perfil.gif", caption="Movimiento horizontal del escaneo", use_container_width=True)
+    st.image("IMA/vista en perfil.gif", caption="Movimiento vertical del escaneo", use_container_width=True)
     
     # ---------------------------
     # Paso 4 - Frecuencia del láser
